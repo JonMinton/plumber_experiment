@@ -35,6 +35,14 @@ function(id){
   delete_volunteer_by_id(id)
 }
 
+#* Modify volunteer details
+#* @param id the id of the volunteer to modify
+#* @param newName the new value of the name to modify
+#* @patch /volunteers/<id>
+function(id, newName){
+  modify_volunteer_details_by_id(id, newName)
+}
+
 
 #* Plot out data from the iris dataset
 #* @param spec If provided, filter the data to only this species (e.g. 'setosa')

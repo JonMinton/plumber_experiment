@@ -42,3 +42,22 @@ delete_volunteer_by_id <- function(id){
 
     list(msg = paste0("could not find id ", id, " to delete"))
 }
+
+modify_volunteer_details_by_id <- function(id, newName){
+  df <- readr::read_csv(here::here("db", "volunteers.csv"))
+  if (id %in% df$id){
+    oldName <- df[df$id == id, "name"]
+    df[df$id == id, "name"] <- newName
+    readr::write_csv(df, here::here("db", "volunteers.csv"))
+    return(
+      list(msg = paste0(
+          "modified id ", id,
+          " (changed name from ", oldName, " to ", newName, ")"
+        )
+      )
+    )
+  }
+
+  list(msg = paste0("could not find id ", id, " to modify"))
+}
+
