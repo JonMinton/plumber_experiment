@@ -1,5 +1,8 @@
 # plumber.R
-source("db_functions.R")
+
+
+source("../controllers/projects_controller.R")
+source("../controllers/volunteers_controller.R")
 
 #* Echo the parameter that was sent in
 #* @param msg The message to echo back.
@@ -7,6 +10,9 @@ source("db_functions.R")
 function(msg=""){
   list(msg = paste0("The message is: '", msg, "'"))
 }
+
+
+# VOLUNTEERS ROUTES
 
 #* Get all volunteers
 #* @get /volunteers
@@ -42,6 +48,65 @@ function(id){
 function(id, newName){
   modify_volunteer_details_by_id(id, newName)
 }
+
+
+#* Get total volunteer hours by id
+#* @param id the id of the volunteer to search for
+#* @get /volunteers/<id>/hours
+function(id){
+  get_total_volunteer_hours_by_id(id)
+}
+
+
+
+
+
+
+# PROJECTS ROUTES
+#* Get all projects
+#* @get /projects
+function(){
+  get_all_projects()
+}
+
+
+#* Get project by id
+#* @param id the id of the project to search for
+#* @get /projects/<id>
+function(id){
+  get_project_by_id(id)
+}
+
+#* Add project
+#* @param name the name of the project to add
+#* @put /projects
+function(name){
+  add_project(name)
+}
+
+#* Delete project by id
+#* @param id the id of the project to delete
+#* @delete /projects/<id>
+function(id){
+  delete_project_by_id(id)
+}
+
+#* Modify project details
+#* @param id the id of the project to modify
+#* @param newName the new value of the name to modify
+#* @patch /projects/<id>
+function(id, newName){
+  modify_project_details_by_id(id, newName)
+}
+
+#* Get total project hours by id
+#* @param id the id of the project to search for
+#* @get /projects/<id>/hours
+function(id){
+  get_total_project_hours_by_id(id)
+}
+
+
 
 
 #* Plot out data from the iris dataset
